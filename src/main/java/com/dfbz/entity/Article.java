@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "article")
 public class Article {
@@ -46,6 +48,20 @@ public class Article {
      */
     @Column(name = "user_id")
     private Integer userId;
+
+    /*
+    * 一起关注同一篇文章的好友
+    * */
+    @Transient
+    List<User> common;
+
+    public List<User> getCommon() {
+        return common;
+    }
+
+    public void setCommon(List<User> common) {
+        this.common = common;
+    }
 
     /**
      * @return id

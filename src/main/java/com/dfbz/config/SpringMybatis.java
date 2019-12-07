@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import tk.mybatis.mapper.session.Configuration;
 
@@ -63,6 +64,9 @@ public class SpringMybatis {
         }
         return null;
     }
-
+    @Bean
+    public DataSourceTransactionManager getTransactionManager(DataSource dataSource){
+        return new DataSourceTransactionManager(dataSource);
+    }
 
 }
