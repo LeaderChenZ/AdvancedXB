@@ -88,7 +88,7 @@
 
     </nav>
     <!-- Sidebar Navigation end-->
-    <div class="page-content">
+    <div class="page-content" id="main-container">
         <div class="page-header">
             <div class="container-fluid">
                 <h2 class="h5 no-margin-bottom">会议系统</h2>
@@ -103,18 +103,18 @@
                     <form class="form-inline">
                         <div class="form-group">
                             <label for="inlineFormInput" class="sr-only">Name</label>
-                            <input id="inlineFormInput" type="text" placeholder="按标题名字查找" class="mr-sm-3 form-control">
+                            <input id="inlineFormInput" type="text" placeholder="按标题名字查找" class="mr-sm-3 form-control" v-model="params.title">
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="查询" class="btn btn-primary mr-sm-3 ">
+                            <input type="button" value="查询" class="btn btn-primary mr-sm-3 " @click="selectAll(pageInfo.pageNum,pageInfo.pageSize)">
                         </div>
                         <!--选择状态-->
                         <div class="form-group">
-                            <select name="dep" class="form-control selectpicker" id="status">
-                                <option>请选择状态</option>
-                                <option>未开始</option>
-                                <option>正在进行</option>
-                                <option>已结束</option>
+                            <select name="dep" class="form-control selectpicker" id="status" v-model="params.status" @change="selectAll(pageInfo.pageNum,pageInfo.pageSize)">
+                                <option value="">请选择状态</option>
+                                <option value="0">未开始</option>
+                                <option value="1">正在进行</option>
+                                <option value="2">已结束</option>
                             </select>
                         </div>
                     </form>
@@ -124,68 +124,32 @@
 
                 </div>
 
-                <ul class="myList">
+                <ul class="myList" v-for="m in pageInfo.list">
                     <li class="list-group-item">
                         <div style="float: right;">
-                            <span><strong>状态：</strong>正在进行</span>
+                            <span v-if="m.status==0"><strong>状态：</strong>未开始</span>
+                            <span v-else-if="m.status==1"><strong>状态：</strong>正在进行</span>
+                            <span v-else-if="m.status==2"><strong>状态：</strong>正在进行</span>
                         </div>
-                        <a href="meeting_detail.html">关于《小标会议平台》项目部分模块功能升级</a>
-                        <p class="h6"><strong>部门：</strong>研发部</p>
-                        <p class="h6"><strong>开始时间：</strong>2019-10-30 15:40</p>
-                        <p style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis">
-                            小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：
-                            小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：
-                            小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：
-                            小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级</p>
+                        <a href="meeting_detail.html">{{m.title}}</a>
+                        <p class="h6"><strong>部门：</strong>{{m.deptName}}</p>
+                        <p class="h6"><strong>开始时间：</strong>{{m.startTime}}</p>
+                        <p style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis">{{m.content}}</p>
+
                     </li>
 
-                    <li class="list-group-item">
-                        <div style="float: right;">
-                            <span><strong>状态：</strong>正在进行</span>
-                        </div>
-                        <a href="meeting_detail.html">关于《小标会议平台》项目部分模块功能升级</a>
-                        <p class="h6"><strong>部门：</strong>研发部</p>
-                        <p class="h6"><strong>开始时间：</strong>2019-10-30 15:40</p>
-                        <p style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis">
-                            小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：
-                            小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：
-                            小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：
-                            小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级</p>
-                    </li>
-
-                    <li class="list-group-item">
-                        <div style="float: right;">
-                            <span><strong>状态：</strong>正在进行</span>
-                        </div>
-                        <a href="meeting_detail.html">关于《小标会议平台》项目部分模块功能升级</a>
-                        <p class="h6"><strong>部门：</strong>研发部</p>
-                        <p class="h6"><strong>开始时间：</strong>2019-10-30 15:40</p>
-                        <p style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis">
-                            小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：
-                            小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：
-                            小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：
-                            小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级：小标会议平台有如下模块需要升级</p>
-                    </li>
 
                 </ul>
 
                 <nav class="text-center" aria-label="Page navigation">
                     <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
+                        <li class="prev"><a href="javascript:void(0);"  @Click="selectAll(1,pageInfo.pageSize)" >首页</a></li>
+                        <li v-if="pageInfo.pageNum>1" :class="pageInfo.pageNum==1?'prev disabled': 'prev'"><a href="javascript:void(0);" @click="selectAll(pageInfo.prePage,pageInfo.pageSize)">上一页</a></li>
+                        <li v-else-if="pageInfo.pageNum<=1" :class="pageInfo.pageNum==1?'prev disabled': 'prev'"><a href="javascript:void(0);" >上一页</a></li>
+                        <li :class="num==pageInfo.pageNum?'active':''"  v-for="num in pageInfo.navigatepageNums"><a href="javascript:void(0);" @click="selectAll(num,pageInfo.pageSize)">{{num}}</a></li>
+                        <li v-if="pageInfo.pageNum<pageInfo.pages" :class="pageInfo.pageNum==pageInfo.pages?'next disabled': 'next'"><a href="javascript:void(0);" @click="selectAll(pageInfo.nextPage,pageInfo.pageSize)">下一页</a></li>
+                        <li v-else-if="pageInfo.pageNum>=pageInfo.pages" :class="pageInfo.pageNum==pageInfo.pages?'next disabled': 'next'"><a href="javascript:void(0);">下一页</a></li>
+                        <li class="next "><a href="javascript:void(0);" @Click="selectAll(pageInfo.pages,pageInfo.pageSize)">尾页</a></li>
                     </ul>
                 </nav>
             </div>
@@ -212,5 +176,10 @@
 <script src="../js/charts-home.js"></script>
 <script src="../js/front.js"></script>
 <script src="../js/custom.js"></script>
+<script src="../js/layer.js"></script>
+<script src="../js/vue/axios.js"></script>
+<script src="../js/vue/vue.js"></script>
+<script src="../js/ztree/jquery.ztree.all-3.5.js"></script>
+<script src="../js/meeting/index.js"></script>
 </body>
 </html>

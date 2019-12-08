@@ -84,7 +84,7 @@
 
     </nav>
     <!-- Sidebar Navigation end-->
-    <div class="page-content">
+    <div class="page-content" id="main-container">
         <div class="page-header">
             <div class="container-fluid">
                 <h2 class="h5 no-margin-bottom">全部部门</h2>
@@ -92,45 +92,18 @@
         </div>
         <section class="no-padding-bottom">
 
-            <div class="list-group subject">
-                <div class="list-group-item">
-                    <a href="#deptDetail1" data-toggle="collapse">研发部 &nbsp;3人</a>
-                    <div id="deptDetail1" class="collapse deptDetail">
-                        <ul>
+            <div class="list-group subject" >
+                <div class="list-group-item" v-for="p in params" >
+                    <a href="#deptDetail" data-toggle="collapse">{{p.name}} &nbsp;{{p.count==null?0:p.count}}人</a>
+                    <div id="deptDetail" class="collapse deptDetail"  >
+                        <ul  v-for="u in p.user">
                             <li>
-                                <a href="#">小东</a>
-                            </li>
-                            <li>
-                                <a href="#">小方</a>
-                            </li>
-                            <li>
-                                <a href="#">小标</a>
+                                <a v-if="u.realName!=null" href="#">{{u.realName}}</a>
                             </li>
                         </ul>
+
                     </div>
-                </div>
-                <div class="list-group-item">
-                    <a href="#deptDetail2" data-toggle="collapse">行政部 &nbsp;2人</a>
-                    <div id="deptDetail2" class="collapse deptDetail">
-                        <ul>
-                            <li>
-                                <a href="#">小标</a>
-                            </li>
-                            <li>
-                                <a href="#">小准</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="list-group-item">
-                    <a href="#deptDetail3" data-toggle="collapse">总裁办公室 &nbsp;1人</a>
-                    <div id="deptDetail3" class="collapse deptDetail">
-                        <ul>
-                            <li>
-                                <a href="#">东方标准</a>
-                            </li>
-                        </ul>
-                    </div>
+
                 </div>
             </div>
         </section>
@@ -153,8 +126,13 @@
 <script src="../vendor/chart.js/Chart.min.js"></script>
 <script src="../vendor/jquery-validation/jquery.validate.min.js"></script>
 <script src="../js/charts-home.js"></script>
+<script src="../js/layer.js"></script>
 <script src="../js/front.js"></script>
 <script src="../js/custom.js"></script>
 <script src="../bootstrap/js/bootstrap-collapse.js"></script>
+<script src="../js/vue/axios.js"></script>
+<script src="../js/vue/vue.js"></script>
+<script src="../js/ztree/jquery.ztree.all-3.5.js"></script>
+<script src="../js/dept/index.js"></script>
 </body>
 </html>

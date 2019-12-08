@@ -3,6 +3,8 @@ package com.dfbz.entity;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import java.util.List;
 
 @Table(name = "dept")
 public class Dept {
@@ -16,6 +18,36 @@ public class Dept {
      * 部门名称
      */
     private String name;
+
+    /*
+    * 部门下的用户数量
+    * */
+    @Transient
+    private Integer count;
+
+    /**
+     * 获取部门id
+     *
+     * @return id - 部门id
+     */
+    @Transient
+    private List<User> user;
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public List<User> getUser() {
+        return user;
+    }
+
+    public void setUser(List<User> user) {
+        this.user = user;
+    }
 
     /**
      * 获取部门id

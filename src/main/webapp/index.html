@@ -21,8 +21,8 @@
 </head>
 <body>
 
-<div class="container myBox">
-    <div class="col-xs-8 col-xs-offset-4 col-sm-6 col-sm-offset-3 form-box">
+<div class="container myBox" >
+    <div class="col-xs-8 col-xs-offset-4 col-sm-6 col-sm-offset-3 form-box" >
         <div class="form-top">
             <div class="form-top-left">
                 <h3>小标会议平台</h3>
@@ -32,26 +32,26 @@
                 <i class="fa fa-key"></i>
             </div>
         </div>
-        <div class="form-bottom">
+        <div class="form-bottom" >
             <form role="form" action="html/home.html" method="post" class="login-form">
 
                 <!--上面的输入框尽可能不需要外边距，使用row解决-->
-                <div class="row">
-                    <div class="form-group">
+                <div class="row" >
+                    <div class="form-group" id="main-container" >
                         <label class="sr-only" for="form-username">Username</label>
-                        <input type="text" name="form-username" placeholder="用户名" class="form-username form-control"
+                        <input type="text" name="form-username" placeholder="用户名" class="form-username form-control" v-model="params.username"
                                id="form-username">
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="form-password">Password</label>
-                        <input type="password" name="form-password" placeholder="密码" class="form-password form-control"
+                        <input type="password" name="form-password" placeholder="密码" class="form-password form-control" v-model="params.password"
                                id="form-password">
                     </div>
 					<div class="form-group">
-                        <input type="text" name="checkCode" id="checkCode"
+                        <input type="text" name="checkCode" id="checkCode" v-model="params.code"
                                placeholder="请输入验证码" style="width: 180px;"/>
-                        <a onclick="document.getElementById('code').src='/checkCode.jsp?v='+Math.random()">
-                            <img src="/checkCode.jsp" title="看不清点击刷新" id="code"/>
+                        <a onclick="document.getElementById('code').src='/getCode.jpg?v='+Math.random()">
+                            <img src="/getCode.jpg" title="看不清点击刷新" id="code"/>
                         </a>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                         <input type="checkbox"> 记住我
                     </label>
                 </div>
-                <button type="submit" class="btn">登录</button>
+                <button type="button" class="btn" @click="login">登录</button>
 
                 <div class="row">
                     <div style="padding: 10px 25px">
@@ -82,5 +82,47 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="js/jquery.backstretch.min.js"></script>
 <script src="js/scripts.js"></script>
+<script src="js/layer.js"></script>
+<script src="js/vue/axios.js"></script>
+<script src="js/vue/vue.js"></script>>
+<script>
+    var vm = new Vue({
+        el: '.myBox',
+        data: function() {
+            return{
+                params:{
+                    username:'',
+                    password:'',
+                    code:''
+                }
+            }
+        },
+        methods: {
+            login:function () {
+                axios({
+                    url:"/xbjy/login",
+                    data:this.params,
+                    method:"post"
+                }).then(res =>{
+                    if(res.data.success){
+                        //成功则将返回信息放入前端的状态管理中，跳转到home.html
+                        //将后台返回的key:value结构数据 转换成json串  放入到userInfo里面
+                        //再将userInfo放入到前端的会话对象sessionStorage中，该sessionStorage对象是整个浏览器不关闭的时候都存在的
+                        sessionStorage.setItem("userInfo",JSON.stringify(res.data.obj));
+                        location.href="html/home.html";
+                    }else{
+                        layer.msg(res.data.msg);
+                    }
+                }).catch(function (error) {
+                    console.log(error)
+                })
+            }
+        },
+        created: function () {
+
+        }
+
+    });
+</script>
 </body>
 </html>
