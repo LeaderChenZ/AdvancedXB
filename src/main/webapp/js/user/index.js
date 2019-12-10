@@ -8,7 +8,8 @@ var vm = new Vue({
         params: {
             pageNum: '',
             pageSize: '',
-            realName: ''
+            realName: '',
+
         }
     },
     methods: {
@@ -42,14 +43,19 @@ var vm = new Vue({
                 layer.msg(error);
             })
         },
-        toUpdate: function (id) {
-
-        },
-        toDelete: function (id) {
-
-        },
-        deleteById: function () {
-
+        chooseFocus: function (id,event) {
+            let checked = $(event.currentTarget).is(":checked");
+            axios({
+                url: "/xbjy/user/chooseFocus",
+                params:{
+                    fid:id,
+                    checked:checked
+                }
+            }).then(res => {
+                layer.msg(res.data.msg);
+            }).catch(function (error) {
+                console.log(error)
+            });
         }
     },
     created: function () {

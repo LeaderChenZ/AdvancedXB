@@ -84,7 +84,7 @@
 
     </nav>
     <!-- Sidebar Navigation end-->
-    <div class="page-content">
+    <div class="page-content" id="main-container">
         <div class="page-header">
             <div class="container-fluid">
                 <h2 class="h5 no-margin-bottom">添加文章</h2>
@@ -97,14 +97,14 @@
                 <form>
                     <div class="form-group">
                         <label class="form-control-label">标题</label>
-                        <input type="text" placeholder="文章标题" class="form-control">
+                        <input type="text" placeholder="文章标题" class="form-control" v-model="article.title">
                     </div>
                     <div class="form-group">
                         <label class="form-control-label">文章内容</label>
-                        <textarea class="form-control" rows="5"></textarea>
+                        <textarea class="form-control" rows="5" v-model="article.content"></textarea>
                     </div>
                     <div class="text-center form-group">
-                        <input type="submit" value="发布" class="btn btn-primary">
+                        <input type="button" value="发布" class="btn btn-primary" @click="save">
                     </div>
                 </form>
             </div>
@@ -131,5 +131,9 @@
 <script src="../js/charts-home.js"></script>
 <script src="../js/front.js"></script>
 <script src="../js/custom.js"></script>
+<script src="../js/layer.js"></script>
+<script src="../js/vue/axios.js"></script>
+<script src="../js/vue/vue.js"></script>
+<script src="../js/article/add.js"></script>
 </body>
 </html>

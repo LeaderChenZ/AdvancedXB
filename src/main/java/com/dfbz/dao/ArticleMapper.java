@@ -25,4 +25,6 @@ public interface ArticleMapper extends Mapper<Article> {
             "and  " +
             "fa.a_id =#{fid}")
     List<User> selectByFaId(long id);
+
+
 }

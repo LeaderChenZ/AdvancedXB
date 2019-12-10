@@ -26,7 +26,9 @@ var vm = new Vue({
             });
         },
         toDetail: function (id) {
-            let uid =1;
+            let userInfo =sessionStorage.getItem("userInfo");
+            let user =  JSON.parse(userInfo);
+            let uid = user.id;
             axios({
                 url: "/xbjy/article/selectByAId",
                 params: {aid: id,uid:uid}
@@ -42,19 +44,10 @@ var vm = new Vue({
                 console.log(error)
             })
         },
-        update: function () {
+        toUpdate: function () {
 
-
-        },
-        toDelete: function (id) {
-
-        },
-        deleteById: function () {
-
-        },
-        save: function () {
-
-        },
+        location.href = "/html/article_add.html"
+        }
     },
     created: function () {
         this.selectAll(this.pageInfo.pageNum, this.pageInfo.pageSize);

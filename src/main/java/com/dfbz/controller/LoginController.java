@@ -45,6 +45,7 @@ public class LoginController {
                     String password = (String)params.get("password");
                     user.setUsername(username);
                     user.setPassword(password);
+
                     User loginUser = userService.selectOne(user);
                     if (loginUser!=null){
                         result.setSuccess(true);
@@ -53,7 +54,8 @@ public class LoginController {
                         map.put("username",username);
                         map.put("id",loginUser.getId());
                         result.setObj(map);
-
+                        user.setId(loginUser.getId());
+                        user.setRealName(loginUser.getRealName());
                         //将用户信息放入session
                         session.setAttribute("user",user);
                     }

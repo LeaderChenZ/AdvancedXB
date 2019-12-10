@@ -97,7 +97,7 @@
                     <li class="list-group-item">
                         <a>{{f.realName}}</a>
                         <div style="float: right" class="text-right">
-                            <input type="button" class="btn btn-danger" value="取消关注">
+                            <input type="button" class="btn btn-danger" value="取消关注" @click="deleteById(f.id)">
                         </div>
                     </li>
 
@@ -136,6 +136,7 @@
 <script src="../js/charts-home.js"></script>
 <script src="../js/front.js"></script>
 <script src="../js/custom.js"></script>
+<script src="../js/layer.js"></script>
 <script src="../js/vue/axios.js"></script>
 <script src="../js/vue/vue.js"></script>
 <script src="../js/ztree/jquery.ztree.all-3.5.js"></script>

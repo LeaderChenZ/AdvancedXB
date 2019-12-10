@@ -50,6 +50,14 @@ public class UserServiceImpl extends IServiceImpl<User> implements UserService  
         }
 
         List<User> qualifications = mapper.selectByExample(example);
+        if (!StringUtils.isEmpty(params.get("id"))){
+            Integer uid = (Integer) params.get("id");
+            //设置查到的用户是否为登录账号用户的关注人
+            for (User user : qualifications) {
+                int i = mapper.selectFocusCount(uid, user.getId());
+                user.setMark(i);
+            }
+        }
 
         return new PageInfo<User>(qualifications);
     }
@@ -82,6 +90,22 @@ public class UserServiceImpl extends IServiceImpl<User> implements UserService  
         long uid = 1;
         List<User> users = mapper.selectFocus(uid);
         return new PageInfo<User>(users);
+    }
+
+    /*
+    * 添加关注
+    * */
+    @Override
+    public int insertFacus(long uid, long fid){
+        return mapper.insertFacus(uid,fid);
+    }
+
+    /*
+       取消关注
+     */
+    @Override
+    public int deleteFacus(long uid, long fid){
+        return mapper.deleteFocus(uid,fid);
     }
 
 

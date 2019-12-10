@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
 @Table(name = "user")
 public class User {
@@ -94,6 +95,20 @@ public class User {
      */
     @Column(name = "dept_id")
     private Integer deptId;
+
+    /*
+    * 选中标记   mark  0:没关注  1：已关注
+    * */
+    @Transient
+    private Integer mark;
+
+    public Integer getMark() {
+        return mark;
+    }
+
+    public void setMark(Integer mark) {
+        this.mark = mark;
+    }
 
     /**
      * @return id
@@ -397,7 +412,7 @@ public class User {
                 ", look=" + look +
                 ", isSecret='" + isSecret + '\'' +
                 ", deptName='" + deptName + '\'' +
-                ", deptId=" + deptId +
+                ", deptId=" + deptId +"mark"+mark+
                 '}';
     }
 }

@@ -11,4 +11,15 @@ public interface UserService extends IService<User> {
     User selectByUId(long id);
 
     PageInfo<User> selectFocus(Map<String, Object> params);
+
+
+    /*
+     * 添加关注
+     * */
+    int insertFacus(long uid, long fid);
+
+    /*
+   取消关注
+  */
+    int deleteFacus(long uid, long fid);
 }

@@ -125,7 +125,7 @@
                     <tr v-for="user in pageInfo.list">
                         <th scope="row">{{user.id}}</th>
                         <td>{{user.realName}}</td>
-                        <td>{{user.gender==1?'男':'女'}}</td>
+                        <td>{{user.gender==1?'男':user.gender==0?'女':''}}</td>
                         <td>{{user.age}}</td>
                         <td>{{user.desc}}</td>
                         <td>
@@ -134,7 +134,7 @@
 
                         <td>
 
-                            <input type="checkbox" value="" class="checkbox-template">
+                            <input type="checkbox" value="" class="checkbox-template" :checked="user.mark==1" @click="chooseFocus(user.id,$event)">
 
                         </td>
                     </tr>

@@ -36,9 +36,9 @@ public class TestUser {
     @Test
     public void testService(){
         HashMap<String,Object> map = new HashMap<>();
-        map.put("realName","管理");
         PageInfo<User> userPageInfo = service.selectByCondition(map);
         System.out.println(userPageInfo);
+
     }
 
     @Test
@@ -52,6 +52,14 @@ public class TestUser {
         HashMap<String,Object> map = new HashMap<>();
         PageInfo<User> userPageInfo = service.selectFocus(map);
         System.out.println(userPageInfo);
+
+
+    }
+
+    @Test
+    public void deleteFocus(){
+        int i = service.deleteFacus(1, 3);
+        System.out.println(i);
 
     }
 }
