@@ -26,5 +26,13 @@ public interface ArticleMapper extends Mapper<Article> {
             "fa.a_id =#{fid}")
     List<User> selectByFaId(long id);
 
-
+    @Select("SELECT  " +
+            "a.* " +
+            "from " +
+            "article a,`user` u " +
+            "where " +
+            "a.user_id = u.id " +
+            "and " +
+            "a.user_id=#{uid}")
+    List<Article> selectByUId(long uid);
 }

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -46,6 +45,20 @@ public class ArticleServiceImpl extends IServiceImpl<Article> implements Article
 
 
         List<Article> articles = mapper.selectArticleConditicon(params);
+        if (params.containsKey("uid")&&!StringUtils.isEmpty(params.get("uid"))){
+            Integer uid = (Integer) params.get("uid");
+            for (Article article : articles) {
+                //设置查到的用户是否为登录账号用户的关注人
+                List<User> users1 = mapper.selectByFaId(article.getId());
+                List<User> users = userMapper.selectFocus(uid);
+                /*
+                 * 去重后得到的user集合
+                 * */
+                    List<User> same = Deduplication.getSame(users, users1);
+                    article.setCommon(same);
+
+            }
+        }
         return new PageInfo<Article>(articles);
     }
 
@@ -65,6 +78,14 @@ public class ArticleServiceImpl extends IServiceImpl<Article> implements Article
         return article;
     }
 
+
+    /*
+    * 根据用户ID查询用户的收藏文章
+    * */
+    @Override
+    public List<Article> SelectCollectArticle(long uid) {
+        return mapper.selectByUId(uid);
+    }
 
 
 

@@ -56,8 +56,13 @@ public class TestArticle {
         for (User user : common) {
             System.out.println(user);
         }
-
-
     }
 
+    @Test
+    public void testByUId(){
+        List<Article> users = service.SelectCollectArticle(5);
+        for (Article user : users) {
+            System.out.println(user);
+        }
+    }
 }

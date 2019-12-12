@@ -9,7 +9,8 @@ var vm = new Vue({
         params:{
             pageNum: '',
             pageSize: '',
-            title:''
+            title:'',
+            uid:''
         },
         favoriteCount:{}
         }
@@ -18,6 +19,9 @@ var vm = new Vue({
         selectAll: function (pageNum, pageSize) {
             this.params.pageNum = pageNum;
             this.params.pageSize = pageSize;
+            let userInfo =sessionStorage.getItem("userInfo");
+            let user =  JSON.parse(userInfo);
+            this.params.uid = user.id;
             axios({
                 url: "/xbjy/article/list",
                 method: "post",

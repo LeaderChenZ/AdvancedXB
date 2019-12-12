@@ -55,6 +55,20 @@ public class Article {
     @Transient
     List<User> common;
 
+    /*
+    * 设置取消收藏的标志
+    * */
+    @Transient
+    Integer flag;
+
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
+    }
+
     public List<User> getCommon() {
         return common;
     }

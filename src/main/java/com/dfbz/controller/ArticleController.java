@@ -27,6 +27,7 @@ public class ArticleController {
 
     @RequestMapping("list")
     PageInfo<Article> list(@RequestBody Map<String, Object> params) {
+        System.out.println(params.get("uid"));
         return service.selectArticleConditicon(params);
     }
 
