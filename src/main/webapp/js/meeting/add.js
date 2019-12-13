@@ -3,7 +3,8 @@ var vm = new Vue({
     data: {
         dept:{
 
-        }
+        },
+        userName:{}
     },
     methods: {
         selectAll: function () {
@@ -16,11 +17,25 @@ var vm = new Vue({
         });
         },
         selectUser:function () {
-
+            let did  = $("#deptId").val();
+            axios({
+                url:"/xbjy/dept/selectUser",
+                params:{
+                    did:did
+                }
+            }).then(res =>{
+                this.userName=res.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
         }
     },
     created: function () {
+        $("#deptId").append('<option value="" selected>请选择部门</option>');
         this.selectAll();
+    },
+    updated: function () {
+        $("#deptId").selectpicker('refresh');
+        $("#userIds").selectpicker('refresh');
     }
-
-});
+})

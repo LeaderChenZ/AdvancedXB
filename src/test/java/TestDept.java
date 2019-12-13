@@ -47,5 +47,12 @@ public class TestDept {
             System.out.println(dept1.getUser());
         }
     }
+    @Test
+    public void test03(){
+        List<User> dept = service.selectUser(1);
+        for (User dept1 : dept) {
+            System.out.println(dept1);
+        }
+    }
 
 }
