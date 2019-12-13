@@ -23,7 +23,7 @@ var vm = new Vue({
             let user =  JSON.parse(userInfo);
             this.params.uid = user.id;
             axios({
-                url: "/xbjy/article/list",
+                url: "/xbjy/article/SelectCollectArticle",
                 method: "post",
                 data: this.params
             }).then(res => {

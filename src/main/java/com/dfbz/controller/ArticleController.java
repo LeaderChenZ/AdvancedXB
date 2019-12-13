@@ -27,7 +27,6 @@ public class ArticleController {
 
     @RequestMapping("list")
     PageInfo<Article> list(@RequestBody Map<String, Object> params) {
-        System.out.println(params.get("uid"));
         return service.selectArticleConditicon(params);
     }
 
@@ -55,5 +54,48 @@ public class ArticleController {
         }
         return result;
     }
+
+    /*
+     * 根据用户ID查询用户的收藏文章
+     * */
+    @RequestMapping("SelectCollectArticle")
+    PageInfo<Article> SelectCollectArticle(@RequestBody Map<String, Object> params){
+        return service.SelectCollectArticle(params);
+    }
+
+    /*
+    * 添加文章
+    * */
+    @RequestMapping("add")
+    Result add(long aid,HttpSession session){
+        User user = (User) session.getAttribute("user");
+        Result result  = new Result();
+
+            int i = service.addArticle(user.getId(), aid);
+            if (i>0)
+            {
+                result.setSuccess(true);
+                result.setMsg("添加成功！");
+            }
+        return result;
+    }
+
+    /*
+     * 添加文章
+     * */
+    @RequestMapping("delete")
+    Result delete(long aid,HttpSession session){
+        User user = (User) session.getAttribute("user");
+        Result result  = new Result();
+
+        int i = service.deleteArticle(user.getId(), aid);
+        if (i>0)
+        {
+            result.setSuccess(true);
+            result.setMsg("取消关注成功！");
+        }
+        return result;
+    }
+
 
 }

@@ -3,7 +3,6 @@ package com.dfbz.service;
 import com.dfbz.entity.Article;
 import com.github.pagehelper.PageInfo;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,9 +18,16 @@ public interface ArticleService extends IService<Article> {
     * */
     Article selectByAId(long aid, long uid);
 
-
     /*
     * 根据用户ID查询用户的收藏文章
     * */
-    List<Article> SelectCollectArticle(long uid);
+    PageInfo<Article> SelectCollectArticle(Map<String, Object> params);
+
+
+    int addArticle(long uid, long aid);
+
+    /*
+     * 删除收藏文章
+     * */
+    int deleteArticle(long uid, long aid);
 }

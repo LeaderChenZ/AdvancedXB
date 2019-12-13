@@ -94,7 +94,7 @@
 
     </nav>
     <!-- Sidebar Navigation end-->
-    <div class="page-content">
+    <div class="page-content" id="page-content">
         <div class="page-header">
             <div class="container-fluid">
                 <h2 class="h5 no-margin-bottom">发布会议</h2>
@@ -112,20 +112,13 @@
                     <!--选择部门-->
                     <div class="form-group">
                         <label class="form-control-label">部门：</label>
-                        <select class="selectpicker" data-live-search="true">
-                            <option>研发部</option>
-                            <option>销售部</option>
-                            <option>行政部</option>
-                            <option>财务部</option>
-                            <option>总裁办公室</option>
+                        <select class="selectpicker" data-live-search="true" @change="selectUser" >
+                            <option v-for="d in dept">{{d.name}}</option>
+
                         </select>
                         <label class="form-control-label">抄送人：</label>
                         <select class="selectpicker" data-live-search="true" multiple>
                             <option>小东</option>
-                            <option>小方</option>
-                            <option>小标</option>
-                            <option>小准</option>
-                            <option>东方标准</option>
                         </select>
                     </div>
                     <!--开始时间-->
@@ -175,6 +168,11 @@
 <script src="../js/charts-home.js"></script>
 <script src="../js/front.js"></script>
 <script src="../js/custom.js"></script>
+<script src="../js/layer.js"></script>
+<script src="../js/vue/axios.js"></script>
+<script src="../js/vue/vue.js"></script>
+<script src="../js/ztree/jquery.ztree.all-3.5.js"></script>
+<script src="../js/meeting/add.js"></script>
 <script>
 $(function () {
 	$('#startTime').datetimepicker();

@@ -30,6 +30,7 @@ public class TestArticle {
 
     @Autowired
     private ArticleService service;
+
     @Test
     public void testArticle(){
         HashMap<String,Object> map = new HashMap<>();
@@ -57,12 +58,12 @@ public class TestArticle {
             System.out.println(user);
         }
     }
-
     @Test
     public void testByUId(){
-        List<Article> users = service.SelectCollectArticle(5);
-        for (Article user : users) {
-            System.out.println(user);
-        }
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("uid",1);
+        map.put("title","如何");
+        PageInfo<Article> page = service.SelectCollectArticle(map);
+        System.out.println(page);
     }
 }

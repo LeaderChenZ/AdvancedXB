@@ -24,4 +24,27 @@ public class ArticleProvider {
         }
         return sb.toString();
     }
+
+    public String selectFavorriteConditicon(Map<String,Object> condition){
+        StringBuilder sb = new StringBuilder();
+        sb.append("select " +
+                "ar.* " +
+                "from " +
+                "article ar " +
+                "left join " +
+                "favorite f " +
+                "on " +
+                "ar.id=f.a_id " +
+                "left join  " +
+                "`user` u " +
+                "on " +
+                "u.id = f.u_id ");
+        if(condition.containsKey("uid")&&!StringUtils.isEmpty(condition.get("uid"))){
+            sb.append(" where  f.u_id=#{uid} ");
+        }
+        if(condition.containsKey("title")&&!StringUtils.isEmpty(condition.get("title"))){
+            sb.append(" and ar.title  like CONCAT('%',#{title},'%')");
+        }
+        return sb.toString();
+    }
 }

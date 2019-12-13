@@ -8,13 +8,17 @@ var vm = new Vue({
         params:{
             pageNum: '',
             pageSize: '',
-            title:''
+            title:'',
+            id:''
         }
     },
     methods: {
         selectAll: function (pageNum, pageSize) {
             this.params.pageNum = pageNum;
             this.params.pageSize = pageSize;
+            let userInfo =sessionStorage.getItem("userInfo");
+            let user =  JSON.parse(userInfo);
+            this.params.id = user.id;
             axios({
                 url: "/xbjy/article/list",
                 method: "post",

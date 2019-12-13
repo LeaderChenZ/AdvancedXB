@@ -20,14 +20,14 @@ import java.util.List;
 public class DeptServiceImpl extends IServiceImpl<Dept> implements DeptService {
 
     @Autowired
-   private DeptMapper deptMapper;
+    private DeptMapper deptMapper;
 
 
     /*
-    * 查询所有部门 和部门下面的所有用户数量   和用户信息
-    * */
+     * 查询所有部门 和部门下面的所有用户数量   和用户信息
+     * */
     @Override
-    public List<Dept>  selectByCondition(){
+    public List<Dept> selectByCondition() {
         List<Dept> dept = deptMapper.selectDept();
         for (Dept dept1 : dept) {
             List<User> users = deptMapper.selectByUName(dept1.getId());
@@ -36,6 +36,12 @@ public class DeptServiceImpl extends IServiceImpl<Dept> implements DeptService {
         return dept;
     }
 
-
+    /*
+     * 查询部门下所有的用户
+     * */
+    @Override
+    public List<User> selectUser(long did) {
+        return deptMapper.selectByUName(did);
+    }
 
 }

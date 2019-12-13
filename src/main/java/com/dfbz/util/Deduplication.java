@@ -1,5 +1,6 @@
 package com.dfbz.util;
 
+import com.dfbz.entity.Article;
 import com.dfbz.entity.User;
 
 import java.util.HashMap;
@@ -29,6 +30,29 @@ public class Deduplication {
             map.put(user.getId(), 1);
         }
         for (User user : min) {
+            if (map.get(user.getId()) != null) {
+                csReturn.add(user);
+            }
+        }
+        return csReturn;
+    }
+
+    public static List<Article> getCollect(List<Article> collmax, List<Article> collmin) {
+        //使用LinkedList防止差异过大时,元素拷贝
+        List<Article> csReturn = new LinkedList<>();
+        List<Article> max = collmax;
+        List<Article> min = collmin;
+        //先比较大小,这样会减少后续map的if判断次数
+        if (collmax.size() < collmin.size()) {
+            max = collmin;
+            min = collmax;
+        }
+        //直接指定大小,防止再散列
+        Map<Object, Integer> map = new HashMap<Object, Integer>(max.size());
+        for (Article user : max) {
+            map.put(user.getId(), 1);
+        }
+        for (Article user : min) {
             if (map.get(user.getId()) != null) {
                 csReturn.add(user);
             }

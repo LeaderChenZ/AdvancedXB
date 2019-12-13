@@ -93,9 +93,9 @@
         <section class="no-padding-bottom">
 
             <div class="list-group subject" >
-                <div class="list-group-item" v-for="p in params" >
-                    <a href="#deptDetail" data-toggle="collapse">{{p.name}} &nbsp;{{p.count==null?0:p.count}}人</a>
-                    <div id="deptDetail" class="collapse deptDetail"  >
+                <div class="list-group-item" v-for="(p,index) in params" >
+                    <a :href="'#deptDetail'+index" data-toggle="collapse">{{p.name}} &nbsp;{{p.count==null?0:p.count}}人</a>
+                    <div :id="'deptDetail'+index" class="collapse deptDetail"  >
                         <ul  v-for="u in p.user">
                             <li>
                                 <a v-if="u.realName!=null" href="#">{{u.realName}}</a>

@@ -1,6 +1,7 @@
 package com.dfbz.controller;
 
 import com.dfbz.entity.Dept;
+import com.dfbz.entity.User;
 import com.dfbz.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,13 @@ public class DeptController {
    public List<Dept> index(){
         return service.selectByCondition();
     }
-
+    /*
+     * 查询部门下所有的用户
+     * */
+    @RequestMapping("selectUser")
+    public List<User> selectUser(long did) {
+        return service.selectUser(did);
+    }
 
 
 }

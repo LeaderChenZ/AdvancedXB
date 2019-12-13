@@ -45,8 +45,8 @@ public class ArticleServiceImpl extends IServiceImpl<Article> implements Article
 
 
         List<Article> articles = mapper.selectArticleConditicon(params);
-        if (params.containsKey("uid")&&!StringUtils.isEmpty(params.get("uid"))){
-            Integer uid = (Integer) params.get("uid");
+        if (params.containsKey("id") && !StringUtils.isEmpty(params.get("id"))) {
+            Integer uid = (Integer) params.get("id");
             for (Article article : articles) {
                 //设置查到的用户是否为登录账号用户的关注人
                 List<User> users1 = mapper.selectByFaId(article.getId());
@@ -54,11 +54,25 @@ public class ArticleServiceImpl extends IServiceImpl<Article> implements Article
                 /*
                  * 去重后得到的user集合
                  * */
-                    List<User> same = Deduplication.getSame(users, users1);
-                    article.setCommon(same);
+                List<User> same = Deduplication.getSame(users, users1);
+                article.setCommon(same);
 
             }
         }
+
+        /*if (params.containsKey("id")&&!StringUtils.isEmpty(params.get("id"))){
+            Integer uid = (Integer) params.get("id");
+            for (Article article : articles) {
+                //设置这篇文章是否是已经收藏的文章
+                List<Article> collect = mapper.selectByUId(uid);
+                for (Article c : collect) {
+                    if (article.getId()==c.getId()){
+                        article.setFlag(1);
+                    }
+                }
+
+            }
+        }*/
         return new PageInfo<Article>(articles);
     }
 
@@ -75,19 +89,68 @@ public class ArticleServiceImpl extends IServiceImpl<Article> implements Article
          * */
         List<User> same = Deduplication.getSame(users, users1);
         article.setCommon(same);
+
+        //设置这篇文章是否是已经收藏的文章
+        List<Article> collect = mapper.selectByUId(uid);
+        for (Article c : collect) {
+            if (article.getId() == c.getId()) {
+                article.setFlag(1);
+            }
+        }
         return article;
     }
 
 
     /*
-    * 根据用户ID查询用户的收藏文章
-    * */
+     * 根据用户ID查询用户的收藏文章
+     * */
     @Override
-    public List<Article> SelectCollectArticle(long uid) {
-        return mapper.selectByUId(uid);
+    public PageInfo<Article> SelectCollectArticle(Map<String, Object> params) {
+        if (StringUtils.isEmpty(params.get("pageNum"))) {
+            params.put("pageNum", 1);
+        }
+
+        if (StringUtils.isEmpty(params.get("pageSize"))) {
+            params.put("pageSize", 3);
+        }
+
+        PageHelper.startPage((Integer) params.get("pageNum"), (Integer) params.get("pageSize"));
+
+
+        List<Article> articles = mapper.selectFavorriteConditicon(params);
+        if (params.containsKey("uid") && !StringUtils.isEmpty(params.get("uid"))) {
+            Integer uid = (Integer) params.get("uid");
+            for (Article article : articles) {
+                //设置查到的用户是否为登录账号用户的关注人
+                List<User> users1 = mapper.selectByFaId(article.getId());
+                List<User> users = userMapper.selectFocus(uid);
+                /*
+                 * 去重后得到的user集合
+                 * */
+                List<User> same = Deduplication.getSame(users, users1);
+                article.setCommon(same);
+
+            }
+        }
+
+        return new PageInfo<Article>(articles);
     }
 
+    /*
+     * 添加收藏文章
+     * */
+    @Override
+    public int addArticle(long uid, long aid) {
+        return mapper.addArticle(uid, aid);
+    }
 
+    /*
+     * 删除收藏文章
+     * */
+    @Override
+    public int deleteArticle(long uid, long aid) {
+        return mapper.deleteArticle(uid, aid);
+    }
 
 
 }

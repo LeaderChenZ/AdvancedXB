@@ -70,7 +70,8 @@
 
             <div class="myTitle">
                 <h3 class="text-center">如何做一名合格的Java工程师</h3>
-                <input type="submit" value="取消收藏" class="btn btn-info">
+                <input v-if="obj.flag==1" type="button" value="取消收藏" class="btn btn-danger" @click="deleteArticle(obj.id)">
+                <input v-else-if="obj.flag==0" type="button" value="收藏文章" class="btn btn-info" @click="addArticle(obj.id)">
 
             </div>
 
@@ -113,6 +114,7 @@
 <script src="../js/charts-home.js"></script>
 <script src="../js/front.js"></script>
 <script src="../js/custom.js"></script>
+<script src="../js/layer.js"></script>
 <script src="../js/vue/axios.js"></script>
 <script src="../js/vue/vue.js"></script>
 <script src="../js/ztree/jquery.ztree.all-3.5.js"></script>

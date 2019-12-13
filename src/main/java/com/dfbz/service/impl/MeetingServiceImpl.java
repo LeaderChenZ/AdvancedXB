@@ -57,5 +57,11 @@ public class MeetingServiceImpl extends IServiceImpl<Meeting> implements Meeting
         return new PageInfo<Meeting>(qualifications);
     }
 
+    /*
+    * 查询所有部门
+    * */
+    /*@Override
+    public List<Meeting> selectAll()*/
+
 
 }

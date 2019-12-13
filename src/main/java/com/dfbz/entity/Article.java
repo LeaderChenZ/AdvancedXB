@@ -59,7 +59,7 @@ public class Article {
     * 设置取消收藏的标志
     * */
     @Transient
-    Integer flag;
+    Integer flag=0;
 
     public Integer getFlag() {
         return flag;
