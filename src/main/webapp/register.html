@@ -22,7 +22,7 @@
 
 <div class="container myBox">
     <div class="col-xs-8 col-xs-offset-4 col-sm-6 col-sm-offset-3 form-box">
-        <div class="form-top">
+        <!--<div class="form-top">
             <div class="form-top-left">
                 <h3>新用户注册</h3>
                 <p>请输入您的信息:</p>
@@ -30,7 +30,7 @@
             <div class="form-top-right">
                 <i class="fa fa-key"></i>
             </div>
-        </div>
+        </div>-->
         <div class="form-bottom">
             <form role="form" action="html/home.html" method="post" class="login-form">
 
@@ -38,30 +38,30 @@
                 <div class="row">
                     <div class="form-group">
                         <label class="sr-only" for="form-username">Email</label>
-                        <input type="text" name="form-email" placeholder="邮箱" class="form-username form-control"
+                        <input type="text" name="form-email" placeholder="邮箱" class="form-username form-control" v-model="params.email"
                                id="form-email">
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="form-username">Username</label>
-                        <input type="text" name="form-username" placeholder="用户名" class="form-username form-control"
+                        <input type="text" name="form-username" placeholder="用户名" class="form-username form-control" v-model="params.username"
                                id="form-username">
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="form-password">Password</label>
-                        <input type="password" name="form-password" placeholder="密码" class="form-password form-control"
+                        <input type="password" name="form-password" placeholder="密码" class="form-password form-control" v-model="params.password"
                                id="form-password">
                     </div>
 
                     <div class="form-group">
                         <label class="sr-only" for="form-password2">Password</label>
-                        <input type="password" name="form-password2" placeholder="确认密码" class="form-password form-control"
+                        <input type="password" name="form-password2" placeholder="确认密码" class="form-password form-control" v-model="params.password2"
                                id="form-password2">
                     </div>
                 </div>
                 <!--上面的输入框尽可能不需要外边距，使用row包裹起来解决-->
 
 
-                <button type="submit" class="btn">注册</button>
+                <button type="button" class="btn" @click="register">注册</button>
 
                 <div class="row">
                     <div style="padding: 10px 25px">
@@ -81,5 +81,9 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="js/jquery.backstretch.min.js"></script>
 <script src="js/scripts.js"></script>
+<script src="js/layer.js"></script>
+<script src="js/vue/axios.js"></script>
+<script src="js/vue/vue.js"></script>
+<script src="js/login/register.js"></script>
 </body>
 </html>

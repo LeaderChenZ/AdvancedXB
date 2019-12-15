@@ -1,5 +1,7 @@
 import com.dfbz.config.SpringMybatis;
+import com.dfbz.entity.Dept;
 import com.dfbz.entity.Meeting;
+import com.dfbz.service.DeptService;
 import com.dfbz.service.MeetingService;
 import com.github.pagehelper.PageInfo;
 import org.junit.Test;
@@ -22,6 +24,8 @@ public class TestMeeting {
 
     @Autowired
     private MeetingService service;
+    @Autowired
+    private DeptService deptService;
 
     @Test
     public void testDept(){
@@ -30,6 +34,13 @@ public class TestMeeting {
 //        map.put("status",0);
         PageInfo<Meeting> meetingPageInfo = service.selectByCondition(map);
         System.out.println(meetingPageInfo);
+    }
+
+    @Test
+    public void test1(){
+        Dept dept = deptService.selectDeptAll("1");
+        System.out.println(dept.getId());
+        System.out.println(dept.getName());
     }
 
 }

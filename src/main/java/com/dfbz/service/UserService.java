@@ -22,4 +22,19 @@ public interface UserService extends IService<User> {
    取消关注
   */
     int deleteFacus(long uid, long fid);
+
+    /*
+     * 验证是否已存在的用户名
+     * */
+    int selectByName(String username);
+
+    /*
+     * 添加用户
+     * */
+    int insertUser(User user);
+
+    /*
+    * 修改密码
+    * */
+    int updatePassword(String password, String userName);
 }

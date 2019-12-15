@@ -44,4 +44,11 @@ public class DeptServiceImpl extends IServiceImpl<Dept> implements DeptService {
         return deptMapper.selectByUName(did);
     }
 
+    /*
+     * */
+    @Override
+    public Dept selectDeptAll(String did) {
+        return deptMapper.selectDept1(did);
+    }
+
 }

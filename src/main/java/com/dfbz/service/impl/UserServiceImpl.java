@@ -21,14 +21,14 @@ import java.util.Map;
  */
 @Service
 @Transactional
-public class UserServiceImpl extends IServiceImpl<User> implements UserService  {
+public class UserServiceImpl extends IServiceImpl<User> implements UserService {
 
     @Autowired
     private UserMapper mapper;
 
     /*
-    * 分页查询和搜索模糊查询
-    * */
+     * 分页查询和搜索模糊查询
+     * */
     @Override
     public PageInfo<User> selectByCondition(Map<String, Object> params) {
         if (StringUtils.isEmpty(params.get("pageNum"))) {
@@ -45,12 +45,12 @@ public class UserServiceImpl extends IServiceImpl<User> implements UserService  
         Example example = new Example(User.class);
         Example.Criteria criteria = example.createCriteria();
         if (!StringUtils.isEmpty(params.get("realName"))) {
-            criteria.andLike("realName","%"+params.get("realName")+"%");
+            criteria.andLike("realName", "%" + params.get("realName") + "%");
 //            criteria.andEqualTo("realName", params.get("realName"));
         }
 
         List<User> qualifications = mapper.selectByExample(example);
-        if (!StringUtils.isEmpty(params.get("id"))){
+        if (!StringUtils.isEmpty(params.get("id"))) {
             Integer uid = (Integer) params.get("id");
             //设置查到的用户是否为登录账号用户的关注人
             for (User user : qualifications) {
@@ -64,19 +64,19 @@ public class UserServiceImpl extends IServiceImpl<User> implements UserService  
 
 
     /*
-    * 根据用户ID查询用户信息
-    * */
+     * 根据用户ID查询用户信息
+     * */
     @Override
-    public User selectByUId(long id){
+    public User selectByUId(long id) {
         return mapper.selectByPrimaryKey(id);
     }
 
     /*
-    * 根据用户ID查询用户关注人数
-    * 自连接查询
-    * */
+     * 根据用户ID查询用户关注人数
+     * 自连接查询
+     * */
     @Override
-    public PageInfo<User> selectFocus(Map<String, Object> params){
+    public PageInfo<User> selectFocus(Map<String, Object> params) {
         if (StringUtils.isEmpty(params.get("pageNum"))) {
             params.put("pageNum", 1);
         }
@@ -93,21 +93,42 @@ public class UserServiceImpl extends IServiceImpl<User> implements UserService  
     }
 
     /*
-    * 添加关注
-    * */
+     * 添加关注
+     * */
     @Override
-    public int insertFacus(long uid, long fid){
-        return mapper.insertFacus(uid,fid);
+    public int insertFacus(long uid, long fid) {
+        return mapper.insertFacus(uid, fid);
     }
 
     /*
        取消关注
      */
     @Override
-    public int deleteFacus(long uid, long fid){
-        return mapper.deleteFocus(uid,fid);
+    public int deleteFacus(long uid, long fid) {
+        return mapper.deleteFocus(uid, fid);
     }
 
+    /*
+     * 验证是否已存在的用户名
+     * */
+    @Override
+    public int selectByName(String username){
+        return mapper.selectByName(username);
+    }
+    /*
+     * 添加用户
+     * */
+    @Override
+    public int insertUser(User user) {
+      return  mapper.insertUser(user);
+    }
 
+    /*
+    * 修改密码
+    * */
+    @Override
+    public int updatePassword(String password, String email){
+        return mapper.updatePassword(password,email);
+    }
 }
 

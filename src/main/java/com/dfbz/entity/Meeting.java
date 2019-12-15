@@ -1,6 +1,7 @@
 package com.dfbz.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -39,6 +40,7 @@ public class Meeting {
      */
     @Column(name = "publish_date")
     @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date publishDate;
 
     /**
@@ -46,6 +48,7 @@ public class Meeting {
      */
     @Column(name = "start_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date startTime;
 
     /**
@@ -53,6 +56,7 @@ public class Meeting {
      */
     @Column(name = "end_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date endTime;
 
     /**

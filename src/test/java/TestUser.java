@@ -60,6 +60,16 @@ public class TestUser {
     public void deleteFocus(){
         int i = service.deleteFacus(1, 3);
         System.out.println(i);
+    }
+    @Test
+    public void selectuserName(){
+        int admin = service.selectByName("admin");
+        System.out.println(admin);
+    }
 
+    @Test
+    public void updatePassword(){
+        int qwq = service.updatePassword("233", "aaa.com");
+        System.out.println(qwq);
     }
 }

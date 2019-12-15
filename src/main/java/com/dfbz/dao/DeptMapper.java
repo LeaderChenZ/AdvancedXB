@@ -28,4 +28,12 @@ public interface DeptMapper extends Mapper<Dept> {
             "and " +
             "d.id=#{did}")
     List<User> selectByUName(long did);
+
+    @Select("select  " +
+            "dept.* " +
+            "from " +
+            "dept  " +
+            "where " +
+            "dept.id =#{did}")
+    Dept selectDept1(String did);
 }
