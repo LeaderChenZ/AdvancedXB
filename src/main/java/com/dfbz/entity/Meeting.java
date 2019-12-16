@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
 
 @Table(name = "meeting")
@@ -69,6 +70,48 @@ public class Meeting {
      */
     @Column(name = "make_user")
     private String makeUser;
+
+    /*
+    * 应到人数
+    * */
+    @Transient
+    private String[] getUser;
+
+    /*
+    * 实到人数
+    * */
+    @Transient
+    private Integer arrivals;
+
+    /*
+    * 未到人数
+    * */
+
+    @Transient Integer late;
+
+    public Integer getArrivals() {
+        return arrivals;
+    }
+
+    public void setArrivals(Integer arrivals) {
+        this.arrivals = arrivals;
+    }
+
+    public Integer getLate() {
+        return late;
+    }
+
+    public void setLate(Integer late) {
+        this.late = late;
+    }
+
+    public String[] getGetUser() {
+        return getUser;
+    }
+
+    public void setGetUser(String[] getUser) {
+        this.getUser = getUser;
+    }
 
     /**
      * @return id

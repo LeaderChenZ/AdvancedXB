@@ -22,7 +22,7 @@
 
 <div class="container myBox">
     <div class="col-xs-8 col-xs-offset-4 col-sm-6 col-sm-offset-3 form-box">
-        <!--<div class="form-top">
+        <div class="form-top">
             <div class="form-top-left">
                 <h3>新用户注册</h3>
                 <p>请输入您的信息:</p>
@@ -30,7 +30,7 @@
             <div class="form-top-right">
                 <i class="fa fa-key"></i>
             </div>
-        </div>-->
+        </div>
         <div class="form-bottom">
             <form role="form" action="html/home.html" method="post" class="login-form">
 
@@ -61,7 +61,7 @@
                 <!--上面的输入框尽可能不需要外边距，使用row包裹起来解决-->
 
 
-                <button type="button" class="btn" @click="register">注册</button>
+                <button type="button" class="btn" @click="register" id="input1">注册</button>
 
                 <div class="row">
                     <div style="padding: 10px 25px">
@@ -85,5 +85,24 @@
 <script src="js/vue/axios.js"></script>
 <script src="js/vue/vue.js"></script>
 <script src="js/login/register.js"></script>
+<script>
+    $(function () {
+        $("#input1").hide();
+        //检查邮箱格式方法
+        function checkEmail(str) {
+            var re = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+            if(re.test(str)){
+                $("#input1").show();
+            }else{
+                alert("邮箱格式错误");
+
+            }
+        }
+        $("#form-email").blur(function(){
+            checkEmail($("#form-email").val());
+        });
+    })
+
+</script>
 </body>
 </html>

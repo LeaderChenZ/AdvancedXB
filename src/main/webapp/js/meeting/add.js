@@ -38,7 +38,7 @@ var vm = new Vue({
             this.meeting.makeUser = $("#userId").val().toString();
             this.meeting.startTime = $("#startTime").val();
             this.meeting.endTime = $("#endTime").val();
-            if (title === "" || this.meeting.startTime === "" || this.meeting.endTime === "" ||
+            if (this.meeting.title === "" || this.meeting.startTime === "" || this.meeting.endTime === "" ||
                 this.meeting.deptId === "" || this.meeting.makeUser === "") {
                 layer.msg("请输入完整！");
                 return;

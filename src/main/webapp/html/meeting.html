@@ -106,11 +106,11 @@
                             <input id="inlineFormInput" type="text" placeholder="按标题名字查找" class="mr-sm-3 form-control" v-model="params.title">
                         </div>
                         <div class="form-group">
-                            <input type="button" value="查询" class="btn btn-primary mr-sm-3 " @click="selectAll(pageInfo.pageNum,pageInfo.pageSize)">
+                            <input type="button" value="查询" class="btn btn-primary mr-sm-3 " @click="selectAll(1,pageInfo.pageSize)">
                         </div>
                         <!--选择状态-->
                         <div class="form-group">
-                            <select name="dep" class="form-control selectpicker" id="status" v-model="params.status" @change="selectAll(pageInfo.pageNum,pageInfo.pageSize)">
+                            <select name="dep" class="form-control selectpicker" id="status" v-model="params.status" @change="selectAll(1,pageInfo.pageSize)">
                                 <option value="">请选择状态</option>
                                 <option value="0">未开始</option>
                                 <option value="1">正在进行</option>
@@ -131,7 +131,7 @@
                             <span v-else-if="m.status==1"><strong>状态：</strong>正在进行</span>
                             <span v-else-if="m.status==2"><strong>状态：</strong>已结束</span>
                         </div>
-                        <a href="meeting_detail.html">{{m.title}}</a>
+                        <a style="color: #8fd19e" @click="selectDetail(m.id)">{{m.title}}</a>
                         <p class="h6"><strong>部门：</strong>{{m.deptName}}</p>
                         <p class="h6"><strong>开始时间：</strong>{{m.startTime}}</p>
                         <p style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis">{{m.content}}</p>

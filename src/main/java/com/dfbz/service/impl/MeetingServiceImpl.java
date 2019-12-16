@@ -58,10 +58,37 @@ public class MeetingServiceImpl extends IServiceImpl<Meeting> implements Meeting
     }
 
     /*
-    * 查询所有部门
+     * 根据ID查询会议信息
+     * */
+    @Override
+    public Meeting selectDetail(long id) {
+        Meeting meeting = mapper.selectDetail(id);
+
+        String[] split = meeting.getMakeUser().split(",");
+        meeting.setGetUser(split);//应到人数
+
+        int l1 = split.length;
+        int arrivals = mapper.selectGetUser(id); //实到人数
+        meeting.setArrivals(arrivals);
+        int late = l1 - arrivals;
+        meeting.setLate(late);
+        return meeting;
+    }
+    /*
+    * 参加会议
     * */
-    /*@Override
-    public List<Meeting> selectAll()*/
+    @Override
+    public  int addMeeting(long uid,long mid){
+        return mapper.addMeeting(uid,mid);
+    }
+
+    /*
+     * 退出会议
+     * */
+    @Override
+    public  int deleteMeeting(long uid,long mid){
+        return mapper.deleteMeeting(uid,mid);
+    }
 
 
 }
