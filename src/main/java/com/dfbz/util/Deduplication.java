@@ -16,10 +16,10 @@ import java.util.Map;
 public class Deduplication {
     public static List<User> getSame(List<User> collmax, List<User> collmin) {
         //使用LinkedList防止差异过大时,元素拷贝
-        List<User> csReturn = new LinkedList<>();
+        List<User> csReturn = new LinkedList<User>();
         List<User> max = collmax;
         List<User> min = collmin;
-        //先比较大小,这样会减少后续map的if判断次数
+        //先比较大小,这样会减少后续map的if判断次数~
         if (collmax.size() < collmin.size()) {
             max = collmin;
             min = collmax;
@@ -39,7 +39,7 @@ public class Deduplication {
 
     public static List<Article> getCollect(List<Article> collmax, List<Article> collmin) {
         //使用LinkedList防止差异过大时,元素拷贝
-        List<Article> csReturn = new LinkedList<>();
+        List<Article> csReturn = new LinkedList<Article>();
         List<Article> max = collmax;
         List<Article> min = collmin;
         //先比较大小,这样会减少后续map的if判断次数

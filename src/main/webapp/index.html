@@ -20,7 +20,6 @@
     </style>
 </head>
 <body>
-
 <div class="container myBox" >
     <div class="col-xs-8 col-xs-offset-4 col-sm-6 col-sm-offset-3 form-box" >
         <!--<div class="form-top">
@@ -63,6 +62,7 @@
                     </label>
                 </div>
                 <button type="button" class="btn" @click="login">登录</button>
+                <button class="btn-group" id="wxlogin">微信登录</button>
                 <div class="row">
                     <div style="padding: 10px 25px">
                         <div style="display: inline-block;float: left" class="text-left"><a href="forget.html">忘记密码?</a></div>
@@ -84,6 +84,7 @@
 <script src="js/layer.js"></script>
 <script src="js/vue/axios.js"></script>
 <script src="js/vue/vue.js"></script>>
+<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 <script>
     var vm = new Vue({
         el: '.myBox',
@@ -122,6 +123,23 @@
         }
 
     });
+</script>
+<script>
+    $("#wxlogin").click(function() {
+        location.href = "/wxloginURl";
+    })
+    /*$("#wxlogin").click(function () {
+        var obj = new WxLogin({
+            self_redirect:true,
+            id:"wxlogin", //页面存放我二维码的容器id
+            appid: "wx3500b25b23938d73",   //审核通过后查看
+            scope: "snsapi_login",   // snsapi_login
+            redirect_uri: "http%3a%2f%2fktc.dfbz.com%2fwx_login",  //编码后的url地址
+            state: "200",   //随便写 防攻击的
+            href:"data:text/css;base64,LmltcG93ZXJCb3ggLnFyY29kZSB7d2lkdGg6IDIwMHB4O30NCi5pbXBvd2VyQm94IC50aXRsZSB7ZGlzcGxheTogbm9uZTt9DQouaW1wb3dlckJveCAuaW5mbyB7d2lkdGg6IDIwMHB4O30NCi5zdGF0dXNfaWNvbiB7ZGlzcGxheTogbm9uZX0NCi5pbXBvd2VyQm94IC5zdGF0dXMge3RleHQtYWxpZ246IGNlbnRlcjt9"
+            //这个就是唯一能设置二维码大小的,内嵌式必须
+        });
+    })*/
 </script>
 </body>
 </html>
